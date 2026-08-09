@@ -1,5 +1,13 @@
 {
   "version": "7",
   "dialect": "mysql",
-  "entries": []
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1786269301788,
+      "tag": "0000_wonderful_polaris",
+      "breakpoints": true
+    }
+  ]
 }
