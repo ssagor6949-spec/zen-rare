@@ -28,8 +28,8 @@ import { DashboardLayoutSkeleton } from './DashboardLayoutSkeleton';
 import { Button } from "./ui/button";
 
 const menuItems = [
-  { icon: LayoutDashboard, label: "Page 1", path: "/" },
-  { icon: Users, label: "Page 2", path: "/some-path" },
+  { icon: LayoutDashboard, label: "Dashboard", path: "/admin" },
+  { icon: Users, label: "Customers", path: "/admin?tab=customers" },
 ];
 
 const SIDEBAR_WIDTH_KEY = "sidebar-width";
@@ -110,7 +110,7 @@ function DashboardLayoutContent({
   const isCollapsed = state === "collapsed";
   const [isResizing, setIsResizing] = useState(false);
   const sidebarRef = useRef<HTMLDivElement>(null);
-  const activeMenuItem = menuItems.find(item => item.path === location);
+  const activeMenuItem = menuItems.find(item => location.startsWith(item.path));
   const isMobile = useIsMobile();
 
   useEffect(() => {
@@ -169,7 +169,7 @@ function DashboardLayoutContent({
               {!isCollapsed ? (
                 <div className="flex items-center gap-2 min-w-0">
                   <span className="font-semibold tracking-tight truncate">
-                    Navigation
+                    <span className="text-gold">ZEN</span> RARE Admin
                   </span>
                 </div>
               ) : null}
@@ -179,7 +179,7 @@ function DashboardLayoutContent({
           <SidebarContent className="gap-0">
             <SidebarMenu className="px-2 py-1">
               {menuItems.map(item => {
-                const isActive = location === item.path;
+                const isActive = location === item.path || (item.path.includes("?") && location.startsWith(item.path));
                 return (
                   <SidebarMenuItem key={item.path}>
                     <SidebarMenuButton
